@@ -12,15 +12,6 @@ const FormSchema1 = z.object({
   author : z.string().nullable(),
 });
 
-const FormSchema = z.object({
-  page_number: z.number().nullable(),
-  content: z.string(),
-  book_id: z.string(),
-  deleted: z.string(),
-});
-
-const CreateQuote = FormSchema.omit({ page_number: true, deleted: true});
-
 export async function createBook( formData: FormData ){
   const { title, author } = FormSchema1.parse({
     title : formData.get('title'),
@@ -35,9 +26,18 @@ export async function createBook( formData: FormData ){
 
   const bookId = result.rows[0].id;
 
-  revalidatePath('/'); //window.location = "/";
+  revalidatePath(`/books/${bookId}`); //window.location = "/";
   redirect(`/books/${bookId}`);
 }
+
+const FormSchema = z.object({
+  page_number: z.number().nullable(),
+  content: z.string(),
+  book_id: z.string(),
+  deleted: z.string(),
+});
+
+const CreateQuote = FormSchema.omit({ page_number: true, deleted: true});
 
 export async function createQuote( formData: FormData ) {
   const { content, book_id } = CreateQuote.parse({
