@@ -1,0 +1,49 @@
+//API - GET
+
+import { sql } from '@vercel/postgres';
+import { User, Book, Quote } from './definitions';
+
+export async function getUser(email: string) {
+  try {
+    const user = await sql<User>`
+    SELECT * FROM users WHERE email = ${email}
+    `;
+
+    return user.rows[0] as User;
+
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw new Error('Failed to fetch user.');
+  }
+}
+
+export async function getQuotes( book_id : string ) {
+    try {
+        const quotes = await sql<Quote>`
+          SELECT * FROM quotes
+          WHERE book_id = ${ book_id }
+          AND deleted = 'N'
+          ORDER BY id DESC;
+        `;
+
+        const data = quotes.rows;
+        const count = quotes.rowCount;
+
+        return { data, count };
+    } catch (error) {
+        console.error('Failed to fetch quotes:', error);
+        throw new Error('Failed to fetch quotes.');
+    }
+}
+
+export async function getBooks() {
+  try {
+    const books = await sql<Book>`SELECT * FROM books ORDER BY created_date DESC`;
+    const data = books.rows;
+    
+    return data;
+  } catch (error) {
+      console.error('Failed to fetch quotes:', error);
+      throw new Error('Failed to fetch quotes.');
+  }
+}
