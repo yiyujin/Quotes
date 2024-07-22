@@ -23,8 +23,8 @@ export default async function BookItemPage( { params : { id } } : { params : { i
                                     <p>{ quote.page_number }</p>
                                     <p>{ quote.content }</p>
                                     
-                                    <form action = { deleteQuote } method = "post">
-                                        <input type = "hidden" name = "id" value={ quote.id } />
+                                    <form action = { deleteQuote } method = "DELETE">
+                                        <input type = "hidden" name = "id" value = { quote.id } />
                                         <button type = "submit" className = "text-xs rounded-md border p-2 hover:bg-gray-100">DELETE</button>
                                     </form>
                                 </div>

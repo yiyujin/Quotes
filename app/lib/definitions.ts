@@ -17,4 +17,5 @@ export type Quote = {
     content: string;
     deleted: string;
     book_id: string;
+    created_time: string;
 };

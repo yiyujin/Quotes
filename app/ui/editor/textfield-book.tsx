@@ -21,8 +21,16 @@ export default function TextFieldHome() {
           id = "title"
           name = "title"
           className = "flex-1 p-4 resize-none bg-transparent"
-          placeholder = "Start typing a book.."
+          placeholder = "Title"
         ></textarea>
+
+        <textarea
+          id = "author"
+          name = "author"
+          className = "flex-1 p-4 resize-none bg-transparent"
+          placeholder = "Author"
+        ></textarea>
+
         <button
           type = "submit" // Use type="submit" to trigger form submission
           className = "flex h-8 w-8 hover:opacity-40 items-center justify-center rounded-full bg-black text-white"
