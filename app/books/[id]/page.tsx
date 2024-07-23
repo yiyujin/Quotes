@@ -10,30 +10,29 @@ export default async function BookItemPage( { params : { id } } : { params : { i
         <>
             <div className = "flex flex-col h-full w-full">
 
-                <div className = "flex flex-1 justify-center overflow-auto">
-                    <div className = "flex flex-col">
-                        <h1>book_id: { id } </h1>
-
-                        <h1>rowCount: { count }</h1>
-
-                        <div>
-                            {data.map(( quote ) => (
-                                <div key = { quote.id } className = "flex gap-4">
-                                    <p>{ quote.id }</p>
-                                    <p>{ quote.page_number }</p>
-                                    <p>{ quote.content }</p>
-                                    
-                                    <form action = { deleteQuote } method = "DELETE">
-                                        <input type = "hidden" name = "id" value = { quote.id } />
-                                        <button type = "submit" className = "text-xs rounded-md border p-2 hover:bg-gray-100">DELETE</button>
-                                    </form>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                <div className = "">
+                    <h1>book_id: { id } </h1>
+                    <h1>rowCount: { count }</h1>
                 </div>
 
-                <TextFieldQuote bookId = { id }/>
+                <div className = "flex flex-col-reverse h-1/2 overflow-y-auto">
+                        {data.map(( quote ) => (
+                            <div key = { quote.id } className = "flex gap-4 snap-center">
+                                <p>{ quote.id }</p>
+                                <p>{ quote.page_number }</p>
+                                <p>{ quote.content }</p>
+                                
+                                <form action = { deleteQuote } method = "DELETE">
+                                    <input type = "hidden" name = "id" value = { quote.id } />
+                                    <button type = "submit" className = "text-xs rounded-md border p-2 hover:bg-gray-100">DELETE</button>
+                                </form>
+                            </div>
+                        ))}
+                </div>
+
+                <div className="">
+                    <TextFieldQuote bookId = { id }/>
+                </div>
                 
             </div>
         </>

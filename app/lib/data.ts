@@ -23,7 +23,6 @@ export async function getQuotes( book_id : string ) {
           SELECT * FROM quotes
           WHERE book_id = ${ book_id }
           AND deleted = 'N'
-          ORDER BY id DESC;
         `;
 
         const data = quotes.rows;

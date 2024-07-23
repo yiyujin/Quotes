@@ -19,7 +19,7 @@ export default function NavLink( { href, title } ) {
       )}
     >
       
-      <p className = "flex-1 overflow-hidden whitespace-nowrap text-ellipsis items-center flex">
+      <p className = "flex-1 overflow-y-hidden overflow-x-auto whitespace-nowrap text-ellipsis items-center flex">
         { title }
       </p>
       
