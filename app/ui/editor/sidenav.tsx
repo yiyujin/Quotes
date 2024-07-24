@@ -13,6 +13,10 @@ export default function SideNav() {
           Quotes
         </Link>
 
+        <Link className="flex h-16 items-center px-4" href="/list">
+          List
+        </Link>
+
         <div className="flex-1 overflow-y-auto min-h-0">
           <BookLinks/>
         </div>
