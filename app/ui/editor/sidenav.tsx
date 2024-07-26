@@ -17,6 +17,10 @@ export default function SideNav() {
           List
         </Link>
 
+        <Link className="flex h-16 items-center px-4" href="/lab">
+          Lab
+        </Link>
+
         <div className="flex-1 overflow-y-auto min-h-0">
           <BookLinks/>
         </div>

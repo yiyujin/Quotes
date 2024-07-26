@@ -1,6 +1,6 @@
 import { getQuotesList, getBooksList } from "../lib/data"
 
-export default async function List(){
+export default async function ListPage(){
 
     const { quotesList, quotesListCount } = await getQuotesList();
     // const { booksList, booksListCount } = await getBookList();
