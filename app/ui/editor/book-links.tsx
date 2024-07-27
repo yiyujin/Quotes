@@ -1,5 +1,3 @@
-'use client';
-
 import NavLink from './nav-link';
 import { getBooks } from '../../lib/data';
 

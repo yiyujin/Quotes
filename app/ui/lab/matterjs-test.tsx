@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from "react";
 import Matter from "matter-js";
 
@@ -5,65 +7,71 @@ export function MatterTest(){
     const containerRef = useRef();
     const canvasRef = useRef();
 
-    // const { Engine, Render, Bodies, Runner, World } = Matter;
-
     useEffect(() => {
         let Engine = Matter.Engine;
         let Render = Matter.Render;
         let World = Matter.World;
         let Bodies = Matter.Bodies;
+        let Runner = Matter.Runner;
     
-        // Create an engine
+        //CREATE AN ENGINE
         let engine = Engine.create();
+        let runner = Runner.create();
 
         engine.gravity.x = 0;
 	    engine.gravity.y = 1;
 
-        // Create a renderer
+        const width = 400;
+        const height = 400;
+
+        //CREATE A RENDER
         let render = Render.create({
             element: containerRef.current,
             engine: engine,
             canvas: canvasRef.current,
             options: {
-                width: 400,
-                height: 400,
-                background: "rgba(255, 0, 255, 0.5)",
+                width: width,
+                height: height,
+                background: "220",
                 wireframes: false
             }
         });
 
-        // Create a wall
-        const wall = Bodies.rectangle(0, 400, 400, 40, {
+        //CREATE COMPONENTS
+        const ground = Bodies.rectangle(width/2, height, width, 40, {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
-                strokeStyle: '#000000',
-                lineWidth: 3,
+                strokeStyle: 'red',
+                lineWidth: 10,
             }
         });
 
-        const boxA = Bodies.rectangle(400, 200, 80, 80);
-        const boxB = Bodies.rectangle(450, 50, 80, 80);
+        const ball = Bodies.circle(width/2, height/2, 10, {
+            restitution: 0.9,
+            render: {
+              fillStyle: 'red',
+            },
+        });
 
-        // Add the wall to the world
-        World.add(engine.world, [wall, boxA, boxB]);
+        //ADD GROUND TO THE WORLD
+        World.add(engine.world, [ ground, ball]);
 
-        // Run the engine and renderer
-        Engine.run(engine);
+        //RUN THE ENGINE AND REDNER/CANVAS
+        Runner.run(runner, engine);
         Render.run(render);
 
     }, []);
 
     return (
-        <div
-            ref={containerRef}
-            style={{
-                width: 600,
-                height: 600,
-                background: 'skyblue',
-            }}
-        >
-            <canvas ref={canvasRef} />
-        </div>
+        // <div
+        //     ref = { containerRef }
+        //     style={{
+        //         width: 600,
+        //         height: 600,
+        //     }}
+        // >
+            <canvas ref = { canvasRef} />
+        // </div>
     );
 };
