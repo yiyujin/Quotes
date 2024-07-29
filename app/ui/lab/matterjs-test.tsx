@@ -69,8 +69,21 @@ export function MatterTest() {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
-                strokeStyle: 'red',
-                lineWidth: 10,
+            }
+        });
+
+        const leftWall = Bodies.rectangle(0, height/2, 40, height, {
+            isStatic: true,
+            render: {
+                fillStyle: 'blue',
+            }
+        });
+
+
+        const rightWall = Bodies.rectangle(width, height/2, 40, height, {
+            isStatic: true,
+            render: {
+                fillStyle: 'blue',
             }
         });
 
@@ -82,7 +95,7 @@ export function MatterTest() {
         });
 
         // ADD GROUND TO THE WORLD
-        World.add(engine.world, [ground, ball]);
+        World.add(engine.world, [ground, leftWall, rightWall, ball]);
 
         // RUN THE ENGINE AND RENDER/CANVAS
         Runner.run(runner, engine);
