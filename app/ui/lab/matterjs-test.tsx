@@ -13,15 +13,7 @@ export function MatterTest() {
     const engineRef = useRef();
     const worldRef = useRef();
 
-    const [someStateValue, setSomeStateValue] = useState(false);
-
-    const handleResize = () => {
-        setContraints(boxRef.current.getBoundingClientRect());
-    };
-
     const handleClick = () => {
-        setSomeStateValue(!someStateValue);
-
         // Add a new ball to the world
         const ball = Matter.Bodies.circle(width / 2, height / 2, 10, {
             restitution: 0.9,
@@ -101,26 +93,17 @@ export function MatterTest() {
         Runner.run(runner, engine);
         Render.run(render);
 
-        // HANDLE INTERACTION
-        window.addEventListener('resize', handleResize);
-
     }, []);
 
-    useEffect(() => {
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
 
     return (
-        <div
-            ref={containerRef}
+        <div ref = { containerRef }
             style={{
                 width: 600,
                 height: 600,
             }}
         >
-            <canvas ref={canvasRef} />
+            <canvas ref = { canvasRef } />
 
             <button
                 style={{
@@ -130,7 +113,7 @@ export function MatterTest() {
                     marginBottom: "16px",
                     width: "100%"
                 }}
-                onClick={handleClick}
+                onClick = { handleClick }
             >
                 Press Me!
             </button>
