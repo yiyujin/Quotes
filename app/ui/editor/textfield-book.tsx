@@ -2,19 +2,24 @@
 
 import { createBook } from '../../lib/action';
 import { ArrowUpIcon } from '@heroicons/react/24/outline';
+import { FormEvent } from 'react';
 
 export default function TextFieldHome() {
-  const handleSubmit = async ( event ) => {
+  const handleSubmit = async ( event: FormEvent<HTMLFormElement> ) => {
     event.preventDefault();
 
-    const formData = new FormData( event.target );
-    await createBook( formData );
+    const formData = new FormData(event.currentTarget as HTMLFormElement);
+    await createBook(formData);
 
-    event.target.reset();
+    // Null check before calling reset
+    const formElement = event.currentTarget as HTMLFormElement;
+    if (formElement) {
+      formElement.reset();
+    }
   };
 
   return (
-    <form action = { createBook } onSubmit = { handleSubmit } method="POST" className="w-full p-4 rounded-[24px] bg-slate-100">
+    <form action = { createBook } onSubmit = { handleSubmit } className="w-full p-4 rounded-[24px] bg-slate-100">
       <div className = "flex items-center">
         <label htmlFor = "title" className = "sr-only">Content</label>
         <textarea

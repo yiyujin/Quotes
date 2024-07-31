@@ -3,9 +3,9 @@
 import { createQuote } from '../../lib/action';
 import { ArrowUpIcon } from '@heroicons/react/24/outline';
 
-export default function TextFieldQuote( { bookId } ) {
+export default function TextFieldQuote( { bookId }: { bookId: string } ) {
   
-  const handleSubmit = async ( event ) => {
+  const handleSubmit = async ( event : React.FormEvent<HTMLInputElement> ) => {
     event.preventDefault();
 
     const formData = new FormData( event.target );
@@ -34,16 +34,8 @@ export default function TextFieldQuote( { bookId } ) {
             <ArrowUpIcon className = "w-6" />
           </button>
         </div>
-
-        <div className = "hidden flex items-center gap-2">
-          <label htmlFor = "book_id" className="sr-only">Content</label>
-          <textarea
-            id = "book_id"
-            name = "book_id"
-            className = "flex-1 p-4 resize-none bg-transparent"
-            value = { bookId }
-          ></textarea>        
-        </div>
+        
+        <input type="hidden" name="book_id" value={bookId} />
       </div>
 
     </form>

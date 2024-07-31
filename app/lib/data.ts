@@ -52,7 +52,7 @@ export async function getBooks() {
   }
 }
 
-export async function getQuotesList( book_id : string ) {
+export async function getQuotesList() {
   try {
       const quotes = await sql<Quote>`
         SELECT * FROM quotes

@@ -98,7 +98,7 @@ export function MatterTest() {
 
     return (
         <div ref = { containerRef }
-            style={{
+            style = {{
                 width: 600,
                 height: 600,
             }}
@@ -106,7 +106,7 @@ export function MatterTest() {
             <canvas ref = { canvasRef } />
 
             <button
-                style={{
+                style = {{
                     cursor: "pointer",
                     display: "block",
                     textAlign: "center",

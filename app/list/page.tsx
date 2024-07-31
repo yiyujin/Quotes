@@ -18,26 +18,30 @@ export default async function ListPage(){
 
                 <div className = "flex h-full overflow-y-auto">
                     <table>
-                        <tr>
-                            <th>book_id</th>
-                            <th>id</th>
-                            <th>page_number</th>
-                            <th>content</th>
-                        </tr>
-                        
-                        { quotesList.map(( quote ) => (
-                            <tr key = { quote.id } className = "">
-                                <td>{ quote.book_id }</td>
-                                <td>{ quote.id }</td>
-                                <td>{ quote.page_number }</td>
-                                <td>{ quote.content }</td>
-                                
-                                {/* <form action = { deleteQuote } method = "DELETE">
-                                    <input type = "hidden" name = "id" value = { quote.id } />
-                                    <button type = "submit" className = "text-xs rounded-md border p-2 hover:bg-gray-100">DELETE</button>
-                                </form> */}
+                        <thead>
+                            <tr>
+                                <th>book_id</th>
+                                <th>id</th>
+                                <th>page_number</th>
+                                <th>content</th>
                             </tr>
-                        ))}
+                        </thead>
+                        
+                        <tbody>
+                            { quotesList.map(( quote ) => (
+                                <tr key = { quote.id } className = "">
+                                    <td>{ quote.book_id }</td>
+                                    <td>{ quote.id }</td>
+                                    <td>{ quote.page_number }</td>
+                                    <td>{ quote.content }</td>
+                                    
+                                    {/* <form action = { deleteQuote } method = "DELETE">
+                                        <input type = "hidden" name = "id" value = { quote.id } />
+                                        <button type = "submit" className = "text-xs rounded-md border p-2 hover:bg-gray-100">DELETE</button>
+                                    </form> */}
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             
