@@ -7,6 +7,8 @@ import Matter from "matter-js";
 const width = 400;
 const height = 400;
 
+const no = 20;
+
 export function MatterTest() {
     const containerRef = useRef();
     const canvasRef = useRef();
@@ -88,6 +90,17 @@ export function MatterTest() {
 
         // ADD GROUND TO THE WORLD
         World.add(engine.world, [ground, leftWall, rightWall, ball]);
+
+        // ADD 20 BALLS TO THE WORLD
+        for (let i = 0; i < no; i++) {
+            const ball = Bodies.circle(Math.random() * width, Math.random() * height, 10, {
+                restitution: 0.9,
+                render: {
+                    fillStyle: 'red',
+                },
+            });
+            World.add(engine.world, ball);
+        }
 
         // RUN THE ENGINE AND RENDER/CANVAS
         Runner.run(runner, engine);
