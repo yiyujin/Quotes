@@ -32,7 +32,7 @@ export async function getQuotes( book_id : string ) {
         return { data, count };
     } catch (error) {
         console.error('Failed to fetch quotes:', error);
-        throw new Error('Failed to fetch quotes.');
+        // throw new Error('Failed to fetch quotes.');
     }
 }
 

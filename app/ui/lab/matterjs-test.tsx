@@ -2,30 +2,48 @@
 
 import { useRef, useEffect, useState } from "react";
 import Matter from "matter-js";
+import { getQuotes } from "../../lib/data";
 
-//CREATE CANVAS VARIABLES
+// CREATE CANVAS VARIABLES
 const width = 400;
 const height = 400;
 
-const no = 20;
-
 export function MatterTest() {
-    const containerRef = useRef();
-    const canvasRef = useRef();
-    const engineRef = useRef();
-    const worldRef = useRef();
+    const [quoteCount, setQuoteCount] = useState(0);  // State to store the row count
+    const containerRef = useRef(null);
+    const canvasRef = useRef(null);
+    const engineRef = useRef(null);
+    const worldRef = useRef(null);
 
     const handleClick = () => {
-        // Add a new ball to the world
-        const ball = Matter.Bodies.circle(width / 2, height / 2, 10, {
-            restitution: 0.9,
-            render: {
-                fillStyle: 'red',
-            },
-        });
-
-        Matter.World.add(worldRef.current, ball);
+        if (worldRef.current) {
+            // Add a new ball to the world
+            const ball = Matter.Bodies.circle(width / 2, height / 2, 10, {
+                restitution: 0.9,
+                render: {
+                    fillStyle: 'red',
+                },
+            });
+            Matter.World.add(worldRef.current, ball);
+        }
     };
+
+    useEffect(() => {
+        async function fetchQuotes() {
+            try {
+                const { count } = await getQuotes('4bfee87f-0235-4947-86ed-77535286b66c'); // Provide the actual book_id
+                if (typeof count === 'number') {
+                    setQuoteCount(count);
+                } else {
+                    console.error('Invalid count value:', count);
+                }
+            } catch (error) {
+                console.error('Failed to fetch quotes:', error);
+            }
+        }
+
+        fetchQuotes();
+    }, []);
 
     useEffect(() => {
         let Engine = Matter.Engine;
@@ -66,15 +84,14 @@ export function MatterTest() {
             }
         });
 
-        const leftWall = Bodies.rectangle(0, height/2, 40, height, {
+        const leftWall = Bodies.rectangle(0, height / 2, 40, height, {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
             }
         });
 
-
-        const rightWall = Bodies.rectangle(width, height/2, 40, height, {
+        const rightWall = Bodies.rectangle(width, height / 2, 40, height, {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
@@ -88,11 +105,11 @@ export function MatterTest() {
             },
         });
 
-        // ADD GROUND TO THE WORLD
+        // ADD COMPONENTS TO THE WORLD
         World.add(engine.world, [ground, leftWall, rightWall, ball]);
 
-        // ADD 20 BALLS TO THE WORLD
-        for (let i = 0; i < no; i++) {
+        // ADD BALLS TO THE WORLD BASED ON quoteCount
+        for (let i = 0; i < quoteCount; i++) {
             const ball = Bodies.circle(Math.random() * width, Math.random() * height, 10, {
                 restitution: 0.9,
                 render: {
@@ -106,27 +123,28 @@ export function MatterTest() {
         Runner.run(runner, engine);
         Render.run(render);
 
-    }, []);
+        // CLEANUP FUNCTION
+        return () => {
+            Matter.Render.stop(render);
+            Matter.Runner.stop(runner);
+            Matter.World.clear(engine.world);
+            Matter.Engine.clear(engine);
+        };
 
+    }, [quoteCount]); // Dependency array includes quoteCount
 
     return (
-        <div ref = { containerRef }
-            style = {{
-                width: 600,
-                height: 600,
-            }}
-        >
-            <canvas ref = { canvasRef } />
-
+        <div ref={containerRef} style={{ width: 600, height: 600 }}>
+            <canvas ref={canvasRef} />
             <button
-                style = {{
+                style={{
                     cursor: "pointer",
                     display: "block",
                     textAlign: "center",
                     marginBottom: "16px",
                     width: "100%"
                 }}
-                onClick = { handleClick }
+                onClick={handleClick}
             >
                 Press Me!
             </button>
