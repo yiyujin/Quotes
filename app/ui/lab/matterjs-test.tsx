@@ -2,14 +2,12 @@
 
 import { useRef, useEffect, useState } from "react";
 import Matter from "matter-js";
-import { getQuotes } from "../../lib/data";
 
 // CREATE CANVAS VARIABLES
 const width = 400;
 const height = 400;
 
-export function MatterTest() {
-    const [quoteCount, setQuoteCount] = useState(0);  // State to store the row count
+export function MatterTest( { quoteCount } : { quoteCount : number } ) {
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const engineRef = useRef(null);
@@ -27,23 +25,6 @@ export function MatterTest() {
             Matter.World.add(worldRef.current, ball);
         }
     };
-
-    useEffect(() => {
-        async function fetchQuotes() {
-            try {
-                const { count } = await getQuotes('4bfee87f-0235-4947-86ed-77535286b66c'); // Provide the actual book_id
-                if (typeof count === 'number') {
-                    setQuoteCount(count);
-                } else {
-                    console.error('Invalid count value:', count);
-                }
-            } catch (error) {
-                console.error('Failed to fetch quotes:', error);
-            }
-        }
-
-        fetchQuotes();
-    }, []);
 
     useEffect(() => {
         let Engine = Matter.Engine;
