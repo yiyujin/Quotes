@@ -4,27 +4,16 @@ import { useRef, useEffect, useState } from "react";
 import Matter from "matter-js";
 
 // CREATE CANVAS VARIABLES
-const width = 400;
-const height = 400;
+const width = window.innerWidth - 260 - 32;
+const height = window.innerHeight;
+const r = 10;
+const wallWidth = 10;
 
 export function MatterTest( { quoteCount } : { quoteCount : number } ) {
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const engineRef = useRef(null);
     const worldRef = useRef(null);
-
-    const handleClick = () => {
-        if (worldRef.current) {
-            // Add a new ball to the world
-            const ball = Matter.Bodies.circle(width / 2, height / 2, 10, {
-                restitution: 0.9,
-                render: {
-                    fillStyle: 'red',
-                },
-            });
-            Matter.World.add(worldRef.current, ball);
-        }
-    };
 
     useEffect(() => {
         let Engine = Matter.Engine;
@@ -58,28 +47,28 @@ export function MatterTest( { quoteCount } : { quoteCount : number } ) {
         });
 
         // CREATE COMPONENTS
-        const ground = Bodies.rectangle(width / 2, height, width, 40, {
+        const ground = Bodies.rectangle(width / 2, height, width, wallWidth, {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
             }
         });
 
-        const leftWall = Bodies.rectangle(0, height / 2, 40, height, {
+        const leftWall = Bodies.rectangle(0, height / 2, wallWidth, height, {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
             }
         });
 
-        const rightWall = Bodies.rectangle(width, height / 2, 40, height, {
+        const rightWall = Bodies.rectangle(width, height / 2, wallWidth, height, {
             isStatic: true,
             render: {
                 fillStyle: 'blue',
             }
         });
 
-        const ball = Bodies.circle(width / 2, height / 2, 10, {
+        const ball = Bodies.circle(width / 2, height / 2, r, {
             restitution: 0.9,
             render: {
                 fillStyle: 'red',
@@ -91,7 +80,7 @@ export function MatterTest( { quoteCount } : { quoteCount : number } ) {
 
         // ADD BALLS TO THE WORLD BASED ON quoteCount
         for (let i = 0; i < quoteCount; i++) {
-            const ball = Bodies.circle(Math.random() * width, Math.random() * height, 10, {
+            const ball = Bodies.circle(Math.random() * width, Math.random() * height, r, {
                 restitution: 0.9,
                 render: {
                     fillStyle: 'red',
@@ -104,31 +93,11 @@ export function MatterTest( { quoteCount } : { quoteCount : number } ) {
         Runner.run(runner, engine);
         Render.run(render);
 
-        // CLEANUP FUNCTION
-        return () => {
-            Matter.Render.stop(render);
-            Matter.Runner.stop(runner);
-            Matter.World.clear(engine.world);
-            Matter.Engine.clear(engine);
-        };
-
-    }, [quoteCount]); // Dependency array includes quoteCount
+    }, []);
 
     return (
-        <div ref={containerRef} style={{ width: 600, height: 600 }}>
-            <canvas ref={canvasRef} />
-            <button
-                style={{
-                    cursor: "pointer",
-                    display: "block",
-                    textAlign: "center",
-                    marginBottom: "16px",
-                    width: "100%"
-                }}
-                onClick={handleClick}
-            >
-                Press Me!
-            </button>
+        <div ref = { containerRef } style = { { width: window.innerWidth - 260 - 32, height: window.innerHeight } }>
+            <canvas ref = { canvasRef } />
         </div>
     );
 }

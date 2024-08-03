@@ -5,7 +5,7 @@ import { ArrowUpIcon } from '@heroicons/react/24/outline';
 
 export default function TextFieldQuote( { bookId }: { bookId: string } ) {
   
-  const handleSubmit = async ( event : React.FormEvent<HTMLInputElement> ) => {
+  const handleSubmit = async ( event ) => {
     event.preventDefault();
 
     const formData = new FormData( event.target );

@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import BookLinks from './book-links';
-import { PowerIcon } from '@heroicons/react/24/outline';
 import styles from '@/app/ui/home.module.css';
 
 export default function SideNav() {
-  const link = { name: 'New', href: '/editor', icon: PowerIcon };
-
   return (
     <div className="flex flex-col h-full px-4 py-4 bg-slate-100">
       <div className = { styles.sidenav }>

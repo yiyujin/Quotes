@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 
 export default function NavLink( { href, title } ) {
   const pathname = usePathname();
@@ -22,8 +21,6 @@ export default function NavLink( { href, title } ) {
       <p className = "flex-1 overflow-y-hidden overflow-x-auto whitespace-nowrap text-ellipsis items-center flex">
         { title }
       </p>
-      
-      {/* <EllipsisHorizontalIcon className = "w-6" /> */}
 
     </Link>
   );
