@@ -85,3 +85,18 @@ export async function getBooksList() {
       throw new Error('Failed to fetch quotes.');
   }
 }
+
+export async function getQuotesCount() {
+  try {
+      const quotes = await sql<Quote>`
+        SELECT COUNT(*) AS count, book_id
+        FROM quotes GROUP BY book_id ORDER BY count DESC;
+      `;
+
+      const data = quotes.rows;
+
+      return { data };
+  } catch (error) {
+      console.error('Failed to fetch count', error);
+  }
+}

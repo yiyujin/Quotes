@@ -18,6 +18,7 @@ export default async function ListPage(){
 
                 <div className = "flex h-full overflow-y-auto">
                     <table>
+                        
                         <thead>
                             <tr>
                                 <th>book_id</th>
@@ -42,6 +43,7 @@ export default async function ListPage(){
                                 </tr>
                             ))}
                         </tbody>
+
                     </table>
                 </div>
             
