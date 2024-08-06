@@ -8,7 +8,7 @@ const r = 10;
 const wallWidth = 10;
 const width = window.innerWidth - 260 - 32;
 const height = window.innerHeight - wallWidth / 2;
-const colors = ['#AF50FF', '#00BEFF', '#FF685F', '#F7C839','#FF3E0D', '#FD9540', '#00D37E'];
+const colors = ['#1b1b1b', '#AF50FF', '#00BEFF', '#FF685F', '#F7C839','#FF3E0D', '#FD9540', '#00D37E'];
 let c;
 
 let balls = [];
@@ -76,44 +76,26 @@ export function MatterTest( { quotesList} : { quotesList : object}) {
         World.add(engine.world, [ground, leftWall, rightWall]);
 
         // ADD BALLS TO THE WORLD BASED ON quoteCount
-        // for (let i = 0; i < quotesListCount.length; i++) {
+        for (let i = 0; i < quotesList.length; i++) {
 
-        //     //ASSIGN COLORS BY COUNT GROUP BY BOOK_ID
+            //ASSIGN COLORS BY COUNT GROUP BY BOOK_ID
 
-        //     if(i <= 50){
-        //         c = colors[0];
-        //     } else {
-        //         c = colors[1];
-        //     }
+            if(quotesList[i].book_id == "3c62fd83-728f-4bc2-912d-ce8e04b5baf6"){
+                c = colors[0];
+            } else {
+                c = colors[1];
+            }
 
-        //     const ball = Bodies.circle(Math.random() * width, Math.random() * height, r, {
-        //         restitution: 0.9,
-        //         render: {
-        //             fillStyle: c,
-        //         },
-        //     });
-        //     World.add(engine.world, ball);
-        // }
+            // console.log(quotesList[i].book_id);
 
-        // { quotesList.map(( quote ) => (
-
-        //     let ball = Bodies.circle(Math.random() * width, Math.random() * height, r, {
-        //         restitution: 0.9,
-        //         render: {
-        //             fillStyle: c,
-        //         },
-        //     });
-
-        //     balls.push()
-
-        //     <tr key = { quote.id } className = "">
-        //         <td>{ quote.book_id }</td>
-        //         <td>{ quote.id }</td>
-        //         <td>{ quote.page_number }</td>
-        //         <td>{ quote.content }</td>
-        //     </tr>
-        // ))}
-
+            const ball = Bodies.circle(Math.random() * width, Math.random() * height, r, {
+                restitution: 0.9,
+                render: {
+                    fillStyle: c,
+                },
+            });
+            World.add(engine.world, ball);
+        }
         
         // RUN THE ENGINE AND RENDER/CANVAS
         Runner.run(runner, engine);
