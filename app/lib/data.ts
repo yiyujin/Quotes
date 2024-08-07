@@ -1,7 +1,10 @@
 //API - GET
 
+'use server'
+
 import { sql } from '@vercel/postgres';
 import { User, Book, Quote } from './definitions';
+import { revalidatePath } from 'next/cache';
 
 export async function getUser( email: string ) {
   try {
@@ -53,8 +56,11 @@ export async function getBooks() {
 }
 
 export async function getQuotesList() {
+
+  revalidatePath(`/`);
+
   try {
-      const quotes = await sql<Quote>`
+      const quotes = await sql`
         SELECT * FROM quotes
         ORDER BY book_id;
       `;
@@ -67,6 +73,7 @@ export async function getQuotesList() {
       console.error('Failed to fetch quotes:', error);
       throw new Error('Failed to fetch quotes.');
   }
+
 }
 
 export async function getBooksList() {

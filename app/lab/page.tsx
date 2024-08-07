@@ -1,14 +1,15 @@
 import React from 'react';
 import { MatterTest } from '../ui/lab/matterjs-test';
-import { getQuotesList, getQuotesCount } from '../lib/data';
+import { getQuotesList } from '../lib/data';
 
 export default async function MatterPage(){
-    const  { quotesList } = await getQuotesList();
+    const  { quotesList, quotesListCount } = await getQuotesList();
 
     return (
         <>
             <div className = "">
                 {/* <MatterTest quotesListCount = { quotesListCount }/> */}
+                {/* <h1>rowCount: { quotesListCount }</h1> */}
                 <MatterTest quotesList = { quotesList }/>
             </div>
         </>

@@ -1,3 +1,5 @@
+'use cilent'
+
 import { getQuotesList, getBooksList } from "../lib/data"
 
 export default async function ListPage(){

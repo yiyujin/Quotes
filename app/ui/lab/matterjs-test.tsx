@@ -8,16 +8,15 @@ const r = 10;
 const wallWidth = 10;
 const width = window.innerWidth - 260 - 32;
 const height = window.innerHeight - wallWidth / 2;
-const colors = ['#1b1b1b', '#AF50FF', '#00BEFF', '#FF685F', '#F7C839','#FF3E0D', '#FD9540', '#00D37E'];
-let c;
+const colors = ['#1B1B1B', '#AF50FF', '#00BEFF', '#FF685F', '#F7C839','#FF3E0D', '#FD9540', '#00D37E'];
+// const colors = ['#FF0000', '#00FF00', '#0000FF', '#000000'];
 
-let balls = [];
+let index = 0;
+let colorIndex = 4;
 
-export function MatterTest( { quotesList} : { quotesList : object}) {
+export function MatterTest( { quotesList} : { quotesList : object } ) {
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
-    const engineRef = useRef(null);
-    const worldRef = useRef(null);
 
     useEffect(() => {
         let Engine = Matter.Engine;
@@ -28,19 +27,13 @@ export function MatterTest( { quotesList} : { quotesList : object}) {
 
         // CREATE AN ENGINE
         let engine = Engine.create();
-        let runner = Runner.create();
 
         engine.gravity.x = 0;
         engine.gravity.y = 1;
 
-        // Store engine and world in refs
-        engineRef.current = engine;
-        worldRef.current = engine.world;
-
-        // CREATE A RENDER
+        // CREATE AND RUN A RENDER
         let render = Render.create({
-            element: containerRef.current,
-            engine: engine,
+            engine,
             canvas: canvasRef.current,
             options: {
                 width: width,
@@ -50,7 +43,9 @@ export function MatterTest( { quotesList} : { quotesList : object}) {
             }
         });
 
-        // CREATE COMPONENTS
+        Render.run(render);
+
+        // CREATE WALLS
         const ground = Bodies.rectangle(width / 2, height, width, wallWidth, {
             isStatic: true,
             render: {
@@ -72,35 +67,42 @@ export function MatterTest( { quotesList} : { quotesList : object}) {
             }
         });
 
-        // ADD WALLS TO THE WORLD
         World.add(engine.world, [ground, leftWall, rightWall]);
 
-        // ADD BALLS TO THE WORLD BASED ON quoteCount
+        //CREATE BALLS
         for (let i = 0; i < quotesList.length; i++) {
 
-            //ASSIGN COLORS BY COUNT GROUP BY BOOK_ID
-
-            if(quotesList[i].book_id == "3c62fd83-728f-4bc2-912d-ce8e04b5baf6"){
-                c = colors[0];
-            } else {
-                c = colors[1];
+            //ASSIGN COLORS
+            let standard = quotesList[index].book_id;
+            let current = quotesList[i].book_id;
+            
+            if (standard !== current) { 
+                index = i;
+                colorIndex = (colorIndex + 1) % colors.length;
+            
+                console.log(`
+                    standard: ${standard}
+                    current: ${current}
+                    colorIndex: ${colorIndex}
+                `);
             }
 
-            // console.log(quotesList[i].book_id);
+            let c = colors[colorIndex];
 
-            const ball = Bodies.circle(Math.random() * width, Math.random() * height, r, {
+            let ball = Bodies.circle(width / 2, Math.random() * height, r, {
+                friction: 0.01,
                 restitution: 0.9,
                 render: {
-                    fillStyle: c,
+                    fillStyle: c
                 },
             });
+
             World.add(engine.world, ball);
         }
-        
-        // RUN THE ENGINE AND RENDER/CANVAS
-        Runner.run(runner, engine);
-        Render.run(render);
 
+        //CREATE RUNNER AND RUN THE ENGINE
+        let runner = Runner.create();
+        Runner.run(runner, engine);
     }, []);
 
     return (
