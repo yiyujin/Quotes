@@ -39,21 +39,21 @@ export async function getQuotes( book_id : string ) {
     }
 }
 
-// export async function getBooks() {
-//   try {
-//     const books = await sql<Book>`
-//       SELECT * FROM books
-//       ORDER BY created_date DESC;
-//     `;
+export async function getBooks() {
+  try {
+    const books = await sql<Book>`
+      SELECT * FROM books
+      ORDER BY created_date DESC;
+    `;
 
-//     const data = books.rows;
+    const data = books.rows;
     
-//     return data;
-//   } catch (error) {
-//       console.error('Failed to fetch quotes:', error);
-//       throw new Error('Failed to fetch quotes.');
-//   }
-// }
+    return data;
+  } catch (error) {
+      console.error('Failed to fetch quotes:', error);
+      throw new Error('Failed to fetch quotes.');
+  }
+}
 
 export async function getQuotesList() {
 
