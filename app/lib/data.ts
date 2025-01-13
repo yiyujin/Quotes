@@ -26,7 +26,8 @@ export async function getQuotes( book_id : string ) {
         const quotes = await sql<Quote>`
           SELECT * FROM quotes
           WHERE book_id = ${ book_id }
-          AND deleted = 'N';
+          AND deleted = 'N'
+          ORDER BY created_date DESC;
         `;
 
         const data = quotes.rows;
@@ -61,8 +62,10 @@ export async function getQuotesList() {
 
   try {
       const quotes = await sql`
-        SELECT * FROM quotes
-        ORDER BY book_id;
+          SELECT quotes.*, books.title
+          FROM quotes
+          LEFT JOIN books ON quotes.book_id = books.id
+          ORDER BY created_date DESC;
       `;
 
       const quotesList = quotes.rows;

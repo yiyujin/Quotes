@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SideNav from './ui/editor/sidenav';
+import { notoSerifKorean } from '@/app/ui/fonts';
 
 export const metadata: Metadata = {
   title: "Quotes",
@@ -14,14 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang = "en">
-      <body>
-        <div className = "flex h-screen flex-row">
+      <body className = {`${notoSerifKorean.className} antialiased`}>
+        <div style = { { display : "flex", width : "100vw", height : "100vh" } }>
           <SideNav/>
-          <div className = "flex grow">
-            <div className = "flex grow justify-center items-center">
-              { children }
-            </div>
-          </div>
+          { children }
         </div>
       </body>
     </html>

@@ -7,8 +7,23 @@
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 
-  --custom-background-color: rgba(0, 0, 0, 0.05); /* Red with 40% opacity */
-  --custom-stroke-color: rgb(255, 0, 0, 0.5); /* Fully opaque red */
+  --custom-background-color : "#f9f8fb";
+  --custom-stroke-color: rgb(255, 0, 0, 0.2); /* Fully opaque red */
+
+  /* COLORS */
+  --bg : rgba(249, 248, 251, 1);
+
+  --black40 : rgba(0, 0, 0, 0.4);
+  --black16 : rgba(0, 0, 0, 0.16);
+  --black8 : rgba(0, 0, 0, 0.08);
+  --black4 : rgba(0, 0, 0, 0.04);
+  --black2 : rgba(0, 0, 0, 0.02);
+
+  /* FONT SIZES */
+  --font-size-large : 24px;
+  --font-size-medium : 16px;
+  --font-size-small : 14px;
+  --font-size-tiny : 12px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,16 +34,144 @@
   }
 }
 
+/* GLOBAL */
+html {
+  box-sizing : border-box;
+}
+
 body {
-  /* Applying background color and stroke to every element */
+  background-color: var(--bg);
+
+  color : var(--custom-background-color);
+
   * {
-    background-color: var(--custom-background-color);
-    box-shadow: 0 0 0 1px var(--custom-stroke-color);
+    /* box-shadow: 0 0 0 1px var(--custom-stroke-color); */
+    box-sizing : border-box;
   }
 }
 
-@layer utilities {
+.meta {
+  font-size : var(--font-size-tiny);
+}
+
+.meta2 {
+  font-size : var(--font-size-tiny);
+  color : var(--black40);
+}
+
+/* @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+} */
+
+/* CLASSNAME */
+.sidenav {
+  width: 260px;
+  height: 100%;
+
+  padding : 6px;
+
+  background-color : white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  width : calc(100% - 260px);
+  /* background-color: rgba(255, 0, 0, 0.1); */
+
+  padding : 16px;
+}
+
+.textfieldQuoteContainer {
+  width : 100%;
+  /* quotesTop + textfieldQuote */
+  margin-top : calc(50vh - 400px - 40px);
+}
+
+.textfieldQuote {
+  resize: none;
+  overflow: visible;
+
+  width : 100%;
+  height : 40px;
+
+  font-size : var(--font-size-large);
+  border-bottom : solid 1px var(--black16);
+  background-color: transparent;
+}
+
+.textfieldQuote:focus{
+  outline : none;
+}
+
+.quotesTop {
+  height : 400px;
+}
+
+.quotesList {
+  display : flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+
+  height : 100px;
+}
+
+.quotesList2 {
+  display : flex;
+  flex-direction: column-reverse;
+  overflow-y: auto;
+
+  height : 100%;
+}
+
+.quoteRow {
+  margin-bottom : 24px;
+}
+
+.navDivider {
+  font-size : var(--font-size-tiny);
+  padding : 4px;
+  margin-top : 24px;
+  border-bottom : 1px solid var(--black8);
+}
+
+.navLink {
+  display : flex;
+  height : 48px;
+  align-items: center;
+  padding : 4px;
+}
+
+.navLink.unselected {
+  background-color: transparent;
+}
+
+.navLink.selected {
+  background-color: #94a3b8; /* Tailwind's bg-slate-400 */
+}
+
+.navLink.unselected:hover {
+  background-color :rgba(0, 0, 0, 0.04);
+  cursor : pointer;
+}
+
+.iconBtn {
+  width : 40px;
+  height : 40px;
+
+  align-items: center;
+
+  border-radius: 100%;
+
+  /* padding: 6px; */
+
+  background-color : var(--black8);
+}
+
+.icon {
+  width : 24px;
+  height : 24px;
 }

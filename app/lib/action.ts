@@ -45,8 +45,6 @@ export async function createQuote( formData: FormData ) {
     book_id: formData.get('book_id'),
   });
 
-  console.log('!!!!!!!!!!!!', formData);
-
   const page_number = 0;
   const deleted = 'N';
 

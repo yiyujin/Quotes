@@ -19,7 +19,7 @@ export default function TextFieldHome() {
   };
 
   return (
-    <form action = { createBook } onSubmit = { handleSubmit } className="w-full p-4 rounded-[24px] bg-slate-100">
+    <form action = { createBook } onSubmit = { handleSubmit } className="w-full p-4 bg-slate-100">
       <div className = "flex items-center">
         <label htmlFor = "title" className = "sr-only">Content</label>
         <textarea

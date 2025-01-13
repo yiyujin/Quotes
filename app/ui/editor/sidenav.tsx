@@ -1,31 +1,29 @@
-import Link from 'next/link';
-import BookLinks from './book-links';
-import styles from '@/app/ui/home.module.css';
+import NavLink from './nav-link';
+import { getBooks } from '../../lib/data';
 
-export default function SideNav() {
+export default async function SideNav() {
+  const books = await getBooks();
+
   return (
-    <div className="flex flex-col h-full px-4 py-4 bg-slate-100">
-      <div className = { styles.sidenav }>
-        <Link className="flex h-16 items-center px-4" href="/">
-          Quotes
-        </Link>
+      <div className = "sidenav">
+      
+        <NavLink href = "/" title = "Quotes"/>
 
-        <Link className="flex h-16 items-center px-4" href="/list">
-          List
-        </Link>
+        <NavLink href = "/list" title = "List"/>
 
-        <Link className="flex h-16 items-center px-4" href="/lab">
-          Lab
-        </Link>
+        <NavLink href = "/lab" title = "Lab"/>
 
-        <div className="flex-1 overflow-y-auto min-h-0">
-          <BookLinks/>
-        </div>
+        <NavLink href = "/player" title = "Player"/>
 
-        <Link className="flex h-16 items-center px-4" href="/player">
-          Quotes Player
-        </Link>
-      </div>
+        <p className = "navDivider">Books ({ books.length })</p>
+
+        { books.map( ( book ) => (
+          <NavLink
+            key = { book.id }
+            href = { `/books/${book.id}` }
+            title = { book.title }
+          />
+        ))}
     </div>
   );
 }
