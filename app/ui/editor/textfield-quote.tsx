@@ -15,7 +15,6 @@ export default function TextFieldQuote( { bookId }: { bookId: string } ) {
 
     await createQuote( formData );
 
-    // Reapply the query parameters after form submission
     const currentPath = window.location.pathname;
     router.replace(`${currentPath}?bookTitle=${encodeURIComponent(bookTitle || '')}`);
 
@@ -29,14 +28,14 @@ export default function TextFieldQuote( { bookId }: { bookId: string } ) {
   
     if ( e.key === "Enter" && !e.shiftKey ) {
       const content = e.target.value.trim();
-      if (!content) {
+      if ( !content ) {
         e.preventDefault();
-        return; // Let the default Enter behavior happen if empty
+        return;
       }
       
       e.preventDefault();
       const form = e.target.closest('form') as HTMLFormElement;
-      if (form) {
+      if ( form ) {
         form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
       }
     }

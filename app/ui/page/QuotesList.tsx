@@ -1,20 +1,23 @@
-'use client';
+import { getQuotesList } from "@/app/lib/data";
+import { DeleteQuote } from "./DeleteQuote";
 
-export default function QuotesList( { quotesList, quotesListCount }){
-  const handleDelete = async (id: any) => {
-      console.log("Deleting quote with ID:", id);
-  };
+export default async function QuotesList(){
 
-  return (
-    <div className="quotesList2">
-        {quotesList.map( ( quote ) => (
-            <div key={quote.id} className="quoteRow">
-                <p className="meta2">{quote.title}</p>
-                <p>{quote.content}</p>
+    const { quotesList, quotesListCount } = await getQuotesList();
 
-                <button onClick = { () => handleDelete(quote.id) }>delete</button>
+    return(
+        <>            
+            <p className = "meta">quotes: { quotesListCount }</p>
+
+            <div className = "quotesList2">
+                { quotesList.map( ( quote ) => (
+                    <div key = { quote.id } className = "quoteRow">
+                        <p className = "meta2">{ quote.title }</p>
+                        <p>{ quote.content }</p>
+                        <DeleteQuote id = { quote.id }/>
+                    </div>
+                ))}
             </div>
-        ))}
-    </div>
-  );
+        </>
+    )
 };

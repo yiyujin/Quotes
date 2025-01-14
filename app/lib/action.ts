@@ -64,13 +64,19 @@ export async function createQuote( formData: FormData ) {
   redirect(`/books/${ book_id }`);
 }
 
-export async function deleteQuote(formData: FormData) {
-  const id = Number(formData.get('id'));
+
+ 
+export async function deleteQuote( id : string ) {
+  // await sql`
+  //   UPDATE quotes
+  //   SET deleted = 'Y'
+  //   WHERE id = ${id};
+  // `;
 
   await sql`
-    UPDATE quotes
-    SET deleted = 'Y'
-    WHERE id = ${id};
-  `;
+    DELETE FROM quotes
+    WHERE id = ${id}
+  `
 
+  revalidatePath(`/list`);
 }
