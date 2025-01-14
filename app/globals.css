@@ -64,6 +64,10 @@ button {
   border-radius : 2px;
 }
 
+textarea:focus{
+  outline : none;
+}
+
 .Button {
   background-color : var(--black8);
 
@@ -79,6 +83,22 @@ button {
 
 .Button:hover {
   background-color : var(--black40);
+}
+
+button:hover{ 
+  background-color : var(--black40);
+}
+
+.fullButton {
+  background-color : var(--black8);
+  border-radius : 2px;
+
+  height : 56px;
+  text-align: left;
+
+  font-size : var(--font-size-medium);
+
+  margin-top : 40px;
 }
 
 /* CLASSNAME */
@@ -117,8 +137,8 @@ button {
 }
 
 .textfieldQuote {
-  resize: none;
-  overflow: visible;
+  resize : none;
+  overflow : visible;
 
   width : 100%;
   height : 40px;
@@ -128,8 +148,23 @@ button {
   background-color: transparent;
 }
 
-.textfieldQuote:focus{
-  outline : none;
+.textFieldBookContainer {
+  width : 100%;
+  display : flex;
+  flex-direction: column;
+  margin-top : calc(50vh - 80px);
+}
+
+.textFieldBook {
+  resize : none;
+  overflow : visible;
+
+  width : 100%;
+  height : 40px;
+
+  font-size : var(--font-size-large);
+  border-bottom : solid 1px var(--black16);
+  background-color: transparent;
 }
 
 .quotesTop {

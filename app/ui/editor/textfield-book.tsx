@@ -19,29 +19,23 @@ export default function TextFieldHome() {
   };
 
   return (
-    <form action = { createBook } onSubmit = { handleSubmit } className="w-full p-4 bg-slate-100">
-      <div className = "flex items-center">
-        <label htmlFor = "title" className = "sr-only">Content</label>
+    <form action = { createBook } onSubmit = { handleSubmit }>
+      <div className = "textFieldBookContainer">
         <textarea
           id = "title"
           name = "title"
-          className = "flex-1 p-4 resize-none bg-transparent"
+          className = "textFieldBook"
           placeholder = "Title"
         ></textarea>
 
         <textarea
           id = "author"
           name = "author"
-          className = "flex-1 p-4 resize-none bg-transparent"
+          className = "textFieldBook"
           placeholder = "Author"
         ></textarea>
 
-        <button
-          type = "submit" // Use type="submit" to trigger form submission
-          className = "flex h-8 w-8 hover:opacity-40 items-center justify-center rounded-full bg-black text-white"
-        >
-          <ArrowUpIcon className="w-6" />
-        </button>
+        <button className = "fullButton" type = "submit">start quotes</button>
       </div>
     </form>
   );
