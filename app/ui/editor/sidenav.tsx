@@ -22,6 +22,7 @@ export default async function SideNav() {
             key = { book.id }
             href = { `/books/${book.id}` }
             title = { book.title }
+            includeQuery = { true }
           />
         ))}
     </div>

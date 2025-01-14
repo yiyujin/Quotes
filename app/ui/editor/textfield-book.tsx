@@ -1,21 +1,22 @@
 'use client'
 
 import { createBook } from '../../lib/action';
-import { ArrowUpIcon } from '@heroicons/react/24/outline';
-import { FormEvent } from 'react';
 
 export default function TextFieldHome() {
-  const handleSubmit = async ( event: FormEvent<HTMLFormElement> ) => {
-    event.preventDefault();
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);
+    const title = formData.get('title')?.toString().trim();
+    const author = formData.get('author')?.toString().trim();
 
-    const formData = new FormData(event.currentTarget as HTMLFormElement);
-    await createBook(formData);
-
-    // Null check before calling reset
-    const formElement = event.currentTarget as HTMLFormElement;
-    if (formElement) {
-      formElement.reset();
+    if (!title || !author) {
+      alert('Please fill in both title and author fields');
+      return;
     }
+
+    await createBook(formData);
+    e.target.reset();
   };
 
   return (
