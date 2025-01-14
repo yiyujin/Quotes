@@ -5,7 +5,7 @@ export function DeleteQuote({ id }: { id: string }) {
  
   return (
     <form action = { deleteQuoteWithId }>
-      <button type = "submit">DELETE</button>
+      <button className = "Button" type = "submit">delete</button>
     </form>
   );
 }

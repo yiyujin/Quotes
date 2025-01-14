@@ -26,7 +26,6 @@ export async function getQuotes( book_id : string ) {
         const quotes = await sql<Quote>`
           SELECT * FROM quotes
           WHERE book_id = ${ book_id }
-          AND deleted = 'N'
           ORDER BY created_date DESC;
         `;
 
@@ -36,7 +35,6 @@ export async function getQuotes( book_id : string ) {
         return { data, count };
     } catch (error) {
         console.error('Failed to fetch quotes:', error);
-        // throw new Error('Failed to fetch quotes.');
     }
 }
 

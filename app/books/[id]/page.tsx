@@ -1,5 +1,4 @@
 import { getQuotes } from '../../lib/data';
-import { deleteQuote } from '../../lib/action';
 import TextFieldQuote from '../../ui/editor/textfield-quote';
 
 export default async function BookItemPage( { params : { id } } : { params : { id : string } }){

@@ -67,16 +67,10 @@ export async function createQuote( formData: FormData ) {
 
  
 export async function deleteQuote( id : string ) {
-  // await sql`
-  //   UPDATE quotes
-  //   SET deleted = 'Y'
-  //   WHERE id = ${id};
-  // `;
-
   await sql`
     DELETE FROM quotes
     WHERE id = ${id}
   `
 
-  revalidatePath(`/list`);
+  revalidatePath('/', 'layout');
 }

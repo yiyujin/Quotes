@@ -12,6 +12,7 @@
 
   /* COLORS */
   --bg : rgba(249, 248, 251, 1);
+  --pt : rgba(67, 68,75, 1);
 
   --black40 : rgba(0, 0, 0, 0.4);
   --black16 : rgba(0, 0, 0, 0.16);
@@ -50,6 +51,37 @@ body {
   }
 }
 
+button {
+  background-color : var(--black16);
+
+  font-size : var(--font-size-tiny);
+
+  padding-left : 16px;
+  padding-right : 16px;
+  /* padding-top : 2px;
+  padding-bottom : 2px; */
+
+  border-radius : 2px;
+}
+
+.Button {
+  background-color : var(--black8);
+
+  font-size : var(--font-size-tiny);
+
+  padding-left : 16px;
+  padding-right : 16px;
+  /* padding-top : 2px;
+  padding-bottom : 2px; */
+
+  border-radius : 2px;
+}
+
+.Button:hover {
+  background-color : var(--black40);
+}
+
+/* CLASSNAME */
 .meta {
   font-size : var(--font-size-tiny);
 }
@@ -59,13 +91,6 @@ body {
   color : var(--black40);
 }
 
-/* @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-
-/* CLASSNAME */
 .sidenav {
   width: 260px;
   height: 100%;
