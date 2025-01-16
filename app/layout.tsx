@@ -23,12 +23,15 @@ export default function RootLayout({
         <div style = { { width : "100vw", height : "100vh" } }>
           <NavProvider>
             <StatusBar />
-            <div style = { { display : "flex", flexDirection : "row", width : "100%", height : "calc(100% - 24px)" } }>
+
+            <div style = { { display : "flex", flexDirection : "row", height : "calc(100% - 24px)" } }>
               <NavStateWrapper>
                 <SideNav/>
               </NavStateWrapper>
+              
               { children }
             </div>
+            
           </NavProvider>
         </div>
       </body>

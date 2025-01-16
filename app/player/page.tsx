@@ -1,7 +1,13 @@
-export default function Player(){
+import { getRandomQuote } from "../lib/data";
+
+export default async function Player(){
+    const quote = await getRandomQuote();
+
     return(
         <div className = "page">
-            <h1>Player Page</h1>
+            <div className = "playerQuote">
+                <h1>{ quote?.data }</h1>
+            </div>
         </div>
     )
 };

@@ -108,3 +108,21 @@ export async function getQuotesCount() {
       console.error('Failed to fetch count', error);
   }
 }
+
+export async function getRandomQuote(){
+  try {
+    const quote = await sql<Quote>`
+      SELECT content FROM quotes
+      ORDER BY RANDOM()
+      LIMIT 1;
+    `;
+
+    const data = quote.rows[0].content;
+
+    console.log(data);
+
+    return{ data };
+  } catch (error) {
+    console.error('Failed to fetch random quote', error);
+  }
+}

@@ -51,6 +51,10 @@ body {
   }
 }
 
+h1 {
+  font-size : var(--font-size-large);
+}
+
 button {
   background-color : var(--black16);
 
@@ -112,13 +116,9 @@ button:hover{
 }
 
 .page {
-  width : calc(100% - 260px);
+  flex : 1;
   height : 100%;
   padding : 16px;
-}
-
-.page.full-width {
-  width: 100%;
 }
 
 .textfieldQuoteContainer {
@@ -143,7 +143,7 @@ button:hover{
   width : 100%;
   display : flex;
   flex-direction: column;
-  margin-top : calc(50vh - 80px);
+  margin-top : calc(50vh - 140px);
 }
 
 .textFieldBook {
@@ -266,4 +266,13 @@ button:hover{
 .icon {
   width : 24px;
   height : 24px;
+}
+
+.playerQuote {
+  text-align: center;
+  height : 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

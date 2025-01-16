@@ -6,12 +6,12 @@ interface NavStateWrapperProps {
   children: ReactNode;
 }
 
-export default function NavStateWrapper({ children }: NavStateWrapperProps) {
+export default function NavStateWrapper( { children }: NavStateWrapperProps ) {
   const { nav } = useNav();
 
   return (
-    <div className={`sidenav ${nav ? "closed" : ""}`}>
-      {children}
+    <div className = { `sidenav ${nav ? "closed" : ""}` }>
+      { children }
     </div>
   );
 }

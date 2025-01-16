@@ -1,13 +1,14 @@
 import NavLink from './nav-link';
 import { getBooks } from '../../lib/data';
 import NavStateWrapper from '../page/NavStateWrapper';
+import Link from 'next/link';
 
 export default async function SideNav() {
   const books = await getBooks();
 
   return (
       <NavStateWrapper>
-        <NavLink href = "/" title = "Quotes"/>
+        <Link href = "/" className = "navLink">Quotes</Link>
 
         <p className = "navDivider">Functions</p>
 
