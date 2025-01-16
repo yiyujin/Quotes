@@ -1,6 +1,5 @@
-// contexts/NavContext.tsx
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, ReactNode, useEffect } from "react";
 
 interface NavContextType {
   nav: boolean;
@@ -13,9 +12,25 @@ export function NavProvider({ children }: { children: ReactNode }) {
   const [nav, setNav] = useState(false);
   const toggleNav = () => setNav(!nav);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+
+      if ( (event.metaKey || event.ctrlKey) && event.key === "\\" ) {
+        event.preventDefault();
+        setNav(prevNav => !prevNav);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
-    <NavContext.Provider value={{ nav, toggleNav }}>
-      {children}
+    <NavContext.Provider value = { { nav, toggleNav } }>
+      { children }
     </NavContext.Provider>
   );
 }
