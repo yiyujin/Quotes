@@ -113,6 +113,7 @@ button:hover{
 
 .page {
   width : calc(100% - 260px);
+  height : 100%;
   padding : 16px;
 }
 
@@ -187,7 +188,8 @@ button:hover{
 
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: space-between;
+  /* justify-content: right; */
   gap : 24px;
   padding : 8px;
 

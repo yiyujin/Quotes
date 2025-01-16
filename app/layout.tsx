@@ -3,6 +3,9 @@ import "./globals.css";
 import SideNav from './ui/editor/sidenav';
 import StatusBar from "./ui/page/StatusBar";
 import { notoSerifKorean } from '@/app/ui/fonts';
+import { NavProvider } from "./ui/page/NavContext";
+import NavButton from "./ui/page/NavButton";
+import NavStateWrapper from "./ui/page/NavStateWrapper";
 
 export const metadata: Metadata = {
   title: "Quotes",
@@ -17,12 +20,16 @@ export default function RootLayout({
   return (
     <html lang = "en">
       <body className = {`${notoSerifKorean.className} antialiased`}>
-        <div>
-          <StatusBar/>
-          <div style = { { display : "flex", width : "100vw", height : "100vh" } }>
-            <SideNav/>
-            { children }
-          </div>
+        <div style = { { width : "100vw", height : "100vh" } }>
+          <NavProvider>
+            <StatusBar />
+            <div style = { { display : "flex", flexDirection : "row", width : "100%", height : "calc(100% - 24px)" } }>
+              <NavStateWrapper>
+                <SideNav/>
+              </NavStateWrapper>
+              { children }
+            </div>
+          </NavProvider>
         </div>
       </body>
     </html>

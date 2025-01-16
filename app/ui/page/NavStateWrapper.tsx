@@ -1,27 +1,17 @@
 "use client";
-
-import { useState, ReactNode } from "react";
+import { ReactNode } from "react";
+import { useNav } from "./NavContext";
 
 interface NavStateWrapperProps {
   children: ReactNode;
 }
 
-export default function NavStateWrapper( { children } : NavStateWrapperProps ) {
-  const [nav, setNav] = useState(true);
-  const toggleNav = () => setNav(!nav);
+export default function NavStateWrapper({ children }: NavStateWrapperProps) {
+  const { nav } = useNav();
 
   return (
-    <div>
-      <div style = { { width : "100%", backgroundColor : "red"} }>
-      <button onClick = { toggleNav }>
-        { nav ? "Open" : "Close"}
-      </button>
-      </div>
-
-      <div className = {`sidenav ${nav ? "closed" : ""}`}>
-        { children }
-      </div>
-
+    <div className={`sidenav ${nav ? "closed" : ""}`}>
+      {children}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { useState } from "react";
+import NavButton from "./NavButton";
 
 export default function StatusBar(){
     const date = new Date();
@@ -22,13 +23,14 @@ export default function StatusBar(){
     const formattedDate = `${dayOfWeek} ${month} ${day} ${hours}:${minutes} ${period}`;
 
     const [nav, setNav] = useState(true);
-    const toggleNav = () => setNav(!nav);
 
     return(
         <div className = "statusBar">
-            <button onClick = { toggleNav }>{ nav ? "Open" : "Close"}</button>
-            <p>New York City</p>
-            <p>{ formattedDate }</p>
+            <NavButton/>
+            <div style = { { display : "flex", gap : "24px" } }>
+              <p>New York City</p>
+              <p>{ formattedDate }</p>
+            </div>
         </div>
     )
 }

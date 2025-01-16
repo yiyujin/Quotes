@@ -1,14 +1,14 @@
 "use client";
+import { useNav } from "./NavContext";
 
-interface NavButtonProps {
-  nav: boolean;
-  toggleNav: () => void;
-}
-
-export default function NavButton( { nav, toggleNav } : NavButtonProps) {
+export default function NavButton() {
+  const { nav, toggleNav } = useNav();
+  
   return (
-    <button onClick = { toggleNav }>
-      { nav ? "Open" : "Close" }
-    </button>
+    <div>
+      <button onClick = { toggleNav }>
+        {nav ? "Open" : "Close"}
+      </button>
+    </div>
   );
 }
