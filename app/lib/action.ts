@@ -29,9 +29,10 @@ export async function createBook( formData: FormData ){
   `;
 
   const bookId = result.rows[0].id;
-
-  revalidatePath(`/books/${bookId}`); //window.location = "/";
-  redirect(`/books/${bookId}`);
+  
+  const bookTitle = formData.get('title');
+  revalidatePath(`/books/${bookId}`);
+  redirect(`/books/${bookId}?bookTitle=${encodeURIComponent(bookTitle as string)}`);
 }
 
 const FormSchema = z.object({

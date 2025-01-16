@@ -36,7 +36,7 @@ export default function TextFieldHome() {
           placeholder = "Author"
         ></textarea>
 
-        <button className = "fullButton" type = "submit">start quotes</button>
+        <button className = "fullButton" type = "submit">Start typing quotes..</button>
       </div>
     </form>
   );

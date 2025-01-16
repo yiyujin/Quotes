@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SideNav from './ui/editor/sidenav';
+import StatusBar from "./ui/page/StatusBar";
 import { notoSerifKorean } from '@/app/ui/fonts';
 
 export const metadata: Metadata = {
@@ -16,9 +17,12 @@ export default function RootLayout({
   return (
     <html lang = "en">
       <body className = {`${notoSerifKorean.className} antialiased`}>
-        <div style = { { display : "flex", width : "100vw", height : "100vh" } }>
-          <SideNav/>
-          { children }
+        <div>
+          <StatusBar/>
+          <div style = { { display : "flex", width : "100vw", height : "100vh" } }>
+            <SideNav/>
+            { children }
+          </div>
         </div>
       </body>
     </html>

@@ -12,7 +12,6 @@ export default function TextFieldQuote( { bookId }: { bookId: string } ) {
     e.preventDefault();
 
     const formData = new FormData( e.target );
-
     await createQuote( formData );
 
     const currentPath = window.location.pathname;
@@ -22,7 +21,7 @@ export default function TextFieldQuote( { bookId }: { bookId: string } ) {
   };
 
   const handleKeyDown = (e: any) => {
-    if (e.isComposing || e.keyCode === 229) {
+    if ( e.isComposing || e.keyCode === 229 ) {
       return;
     }
   
@@ -46,15 +45,15 @@ export default function TextFieldQuote( { bookId }: { bookId: string } ) {
   return (
     <div className = "textfieldQuoteContainer">
       <form action = { createQuote } onSubmit = { handleSubmit } method = "POST">  
-            <textarea
-              id = "content"
-              name = "content"
-              className = "textfieldQuote"
-              placeholder = { placeholderText }
-              onKeyDown = { handleKeyDown }
-            ></textarea>
+        <textarea
+          id = "content"
+          name = "content"
+          className = "textfieldQuote"
+          placeholder = { placeholderText }
+          onKeyDown = { handleKeyDown }
+        ></textarea>
 
-          <input type = "hidden" name = "book_id" value = { bookId } />
+        <input type = "hidden" name = "book_id" value = { bookId } />
       </form>
     </div>
   );

@@ -1,13 +1,15 @@
 import NavLink from './nav-link';
 import { getBooks } from '../../lib/data';
+import NavStateWrapper from '../page/NavStateWrapper';
 
 export default async function SideNav() {
   const books = await getBooks();
 
   return (
-      <div className = "sidenav">
-      
+      <NavStateWrapper>
         <NavLink href = "/" title = "Quotes"/>
+
+        <p className = "navDivider">Functions</p>
 
         <NavLink href = "/list" title = "List"/>
 
@@ -25,6 +27,6 @@ export default async function SideNav() {
             includeQuery = { true }
           />
         ))}
-    </div>
+    </NavStateWrapper>
   );
 }
