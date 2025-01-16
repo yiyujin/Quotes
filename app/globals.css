@@ -15,6 +15,7 @@
   --pt : rgba(67, 68,75, 1);
 
   --black40 : rgba(0, 0, 0, 0.4);
+  --black24 : rgba(0, 0, 0, 0.24);
   --black16 : rgba(0, 0, 0, 0.16);
   --black8 : rgba(0, 0, 0, 0.08);
   --black4 : rgba(0, 0, 0, 0.04);
@@ -86,7 +87,7 @@ textarea:focus{
 }
 
 .Button:hover {
-  background-color : var(--black40);
+  background-color : var(--black24);
 }
 
 button:hover{ 
@@ -273,6 +274,7 @@ button:hover{
   height : 100%;
 
   display: flex;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
 }
