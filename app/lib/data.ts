@@ -119,8 +119,6 @@ export async function getRandomQuote(){
 
     const data = quote.rows[0].content;
 
-    console.log(data);
-
     return{ data };
   } catch (error) {
     console.error('Failed to fetch random quote', error);
