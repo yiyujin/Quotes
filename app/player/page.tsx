@@ -57,7 +57,7 @@ export default function Player() {
                 </div>
 
                 <button className = "Button" onClick = { handleAuto }>
-                    { auto ? 'Stop' : 'Play'}
+                    { auto ? 'Pause' : 'Play'}
                 </button>
                 <button className = "Button" onClick = { fetchNewQuote }>Random</button>
             </div>

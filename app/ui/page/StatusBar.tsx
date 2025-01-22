@@ -28,6 +28,7 @@ export default function StatusBar(){
         <div className = "statusBar">
             <NavButton/>
             <div style = { { display : "flex", gap : "24px" } }>
+              <button>이매진</button>
               <p>New York City</p>
               <p>{ formattedDate }</p>
             </div>
