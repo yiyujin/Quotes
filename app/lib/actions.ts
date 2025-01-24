@@ -29,6 +29,36 @@ import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+//CREATE USER
+const FromSchemaUser = z.object({
+  name : z.string(),
+  lastname : z.string(),
+  email : z.string(),
+  password : z.string(),
+})
+
+export async function createUser( formData : FormData ){
+  const { name, lastname, email, password } = FromSchemaUser.parse({
+    name : formData.get('name'),
+    lastname : formData.get('lastname'),
+    email : formData.get('email'),
+    password : formData.get('password'),
+  });
+
+  const result = await sql`
+  INSERT INTO users (name, lastname, email, password, created_date)
+  VALUES(
+    ${name},
+    ${lastname},
+    ${email},
+    ${password},
+    NOW()
+  )
+    RETURNING id
+  `;
+}
+
+//CREATE BOOK
 const FormSchema1 = z.object({
   title : z.string(),
   author : z.string(),

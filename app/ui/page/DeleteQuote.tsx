@@ -1,4 +1,4 @@
-import { deleteQuote } from '@/app/lib/action';
+import { deleteQuote } from '@/app/lib/actions';
  
 export function DeleteQuote({ id }: { id: string }) {
   const deleteQuoteWithId = deleteQuote.bind(null, id);

@@ -1,6 +1,6 @@
 'use client'
 
-import { createQuote } from '../../lib/action';
+import { createQuote } from '../../lib/actions';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function TextFieldQuote( { bookId }: { bookId: string } ) {  

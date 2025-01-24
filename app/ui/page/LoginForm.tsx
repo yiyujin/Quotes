@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { authenticate } from '@/app/lib/action';
+import { authenticate } from '@/app/lib/actions';
 import { useSearchParams } from 'next/navigation';
  
 export default function LoginForm() {
