@@ -56,6 +56,21 @@ h1 {
   font-size : var(--font-size-large);
 }
 
+label {
+  font-size : var(--font-size-tiny);
+}
+
+input {
+  width : 100%;
+  padding : 8px;
+  background-color : white;
+  border : 1px solid var(--black8);
+}
+
+input[type="checkbox"] {
+  width : 40px;
+}
+
 button {
   background-color : var(--black16);
 
@@ -73,8 +88,14 @@ textarea:focus{
   outline : none;
 }
 
+.error {
+  color : red;
+}
+
 .Button {
   background-color : var(--black8);
+
+  width : 100%;
 
   font-size : var(--font-size-tiny);
 

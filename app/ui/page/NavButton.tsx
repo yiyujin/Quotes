@@ -7,7 +7,7 @@ export default function NavButton() {
   return (
     <div>
       <button onClick = { toggleNav }>
-        {nav ? "Open" : "Close"}
+        { nav ? "Open" : "Close" }
       </button>
     </div>
   );
