@@ -7,26 +7,30 @@ import NavButton from "./ui/page/NavButton";
 import NavStateWrapper from "./ui/page/NavStateWrapper";
 import ServerStatusBar from "./ui/page/ServerStatusBar";
 
+import { auth } from "@/auth";
+
+
 export const metadata: Metadata = {
   title: "Quotes",
   description: "Quotes Made Fun",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout( { children, } : Readonly<{ children: React.ReactNode; }>){
+  const session = await auth();
+
   return (
     <html lang = "en">
       <body className = {`${notoSerifKorean.className} antialiased`}>
         <div style = { { width : "100vw", height : "100vh" } }>
           <NavProvider>
-<ServerStatusBar/>
+            <ServerStatusBar/>
             <div style = { { display : "flex", flexDirection : "row", height : "calc(100% - 24px)" } }>
-              <NavStateWrapper>
-                <SideNav/>
-              </NavStateWrapper>
+
+              { session?.user ?
+                <NavStateWrapper>
+                  <SideNav/>
+                </NavStateWrapper>
+              : ""}
               
               { children }
             </div>

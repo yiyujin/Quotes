@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import NavButton from "./NavButton";
 import { handleSignOut } from "@/app/lib/actions";
 
@@ -14,13 +13,23 @@ export default function ClientStatusBar({
   formattedDate
 }: ClientStatusBarProps) {
 
+  const user = session?.user;
+
   return (
     <div className = "statusBar">
-      <NavButton />
-      <div style = { { display: "flex", gap: "24px" } }>
-        <form action = { handleSignOut }>
-          <button>{ session?.user ? `${ session.user.name } Sign Out` : "Sign In" }</button>
-        </form>
+      { user && <NavButton /> }
+
+      <div>
+        { user &&
+        
+        <div style = { { display: "flex", gap: "24px" } }>
+          <p>{ user.name }</p>
+          <form action = { handleSignOut }>
+          <button>{ user ? "Sign Out" : "" }</button>
+          </form>
+        </div>
+         }
+
         <p>New York City</p>
         <p>{ formattedDate }</p>
       </div>
