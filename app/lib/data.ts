@@ -21,27 +21,28 @@ export async function getUser( email: string ) {
   }
 }
 
-export async function getQuotes( book_id : string ) {
-    try {
-        const quotes = await sql<Quote>`
-          SELECT * FROM quotes
-          WHERE book_id = ${ book_id }
-          ORDER BY created_date DESC;
-        `;
+export async function getQuotes( book_id : string, session : Session ) {
+  try {
+    const quotes = await sql<Quote>`
+      SELECT * FROM quotes
+      WHERE book_id = ${ book_id } AND user_id = ${ session?.user.email }
+      ORDER BY created_date DESC;
+    `;
 
-        const data = quotes.rows;
-        const count = quotes.rowCount;
+    const data = quotes.rows;
+    const count = quotes.rowCount;
 
-        return { data, count };
-    } catch (error) {
-        console.error('Failed to fetch quotes:', error);
-    }
+    return { data, count };
+  } catch (error) {
+    console.error('Failed to fetch quotes:', error);
+  }
 }
 
-export async function getBooks() {
+export async function getBooks( session : Session ) {
   try {
     const books = await sql<Book>`
       SELECT * FROM books
+      WHERE user_id = ${ session?.user.email }
       ORDER BY created_date DESC;
     `;
 
@@ -54,15 +55,14 @@ export async function getBooks() {
   }
 }
 
-export async function getQuotesList() {
-
-  revalidatePath(`/`);
+export async function getQuotesList( session : Session ) {
 
   try {
       const quotes = await sql`
           SELECT quotes.*, books.title
           FROM quotes
           LEFT JOIN books ON quotes.book_id = books.id
+          WHERE quotes.user_id = ${ session?.user.email }
           ORDER BY created_date DESC;
       `;
 

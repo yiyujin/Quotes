@@ -3,8 +3,12 @@ import { getBooks } from '../../lib/data';
 import NavStateWrapper from '../page/NavStateWrapper';
 import Link from 'next/link';
 
+import { auth } from '@/auth';
+
 export default async function SideNav() {
-  const books = await getBooks();
+  const session = await auth();
+
+  const books = await getBooks( session );
 
   return (
       <NavStateWrapper>

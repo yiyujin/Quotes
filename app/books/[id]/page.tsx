@@ -1,9 +1,15 @@
 import { getQuotes } from '../../lib/data';
 import TextFieldQuote from '../../ui/editor/textfield-quote';
+import { auth } from '@/auth';
 
 export default async function BookItemPage( { params : { id } } : { params : { id : string } }){
+    const session = await auth();
+    
+    if (!session?.user) {
+        return <div>Please log in to view quotes</div>;
+    }
 
-    const { data, count } = await getQuotes( id );
+    const { data, count } = await getQuotes( id, session );
     
     return(
         <div className = "page">

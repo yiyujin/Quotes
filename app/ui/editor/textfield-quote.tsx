@@ -44,7 +44,7 @@ export default function TextFieldQuote( { bookId }: { bookId: string } ) {
 
   return (
     <div className = "textfieldQuoteContainer">
-      <form action = { createQuote } onSubmit = { handleSubmit } method = "POST">  
+      <form onSubmit = { handleSubmit } method = "POST">  
         <textarea
           id = "content"
           name = "content"

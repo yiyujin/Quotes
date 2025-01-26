@@ -1,8 +1,10 @@
 import { getQuotesList } from "@/app/lib/data";
 import Link from "next/link";
+import { auth } from "@/auth";
 
 export default async function ListPage(){
-    const { quotesList, quotesListCount } = await getQuotesList();
+    const session = await auth();
+    const { quotesList, quotesListCount } = await getQuotesList( session );
 
     return(
         <div className = "page">

@@ -84,7 +84,7 @@ export async function createBook( formData: FormData ){
   const result = await sql`
     INSERT INTO books (user_id, title, author, created_date)
     VALUES (
-      ${ session.user.email },
+      ${ session?.user.email },
       ${title},
       ${author},
       NOW()
@@ -114,8 +114,9 @@ export async function createQuote( formData: FormData ) {
   const deleted = 'N';
 
   await sql`
-    INSERT INTO quotes (book_id, page_number, content, deleted, created_date)
+    INSERT INTO quotes (user_id, book_id, page_number, content, deleted, created_date)
     VALUES (
+      ${ session?.user.email },
       ${book_id},
       ${page_number},
       ${content},
@@ -126,7 +127,7 @@ export async function createQuote( formData: FormData ) {
   `;
 
   revalidatePath(`/books/${ book_id }`);
-  redirect(`/books/${ book_id }`);
+  // redirect(`/books/${ book_id }`);
 }
 
 
