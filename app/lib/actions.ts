@@ -3,6 +3,9 @@
 //AUTHENTICATION
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
+import { auth } from '@/auth';
+
+const session = await auth();
 
 export async function authenticate(
   prevState: string | undefined,
@@ -21,6 +24,12 @@ export async function authenticate(
     }
     throw error;
   }
+}
+
+import { signOut } from '@/auth';
+
+export async function handleSignOut() {
+  await signOut({ redirectTo: '/' });
 }
 
 //API - POST
@@ -56,6 +65,8 @@ export async function createUser( formData : FormData ){
   )
     RETURNING id
   `;
+
+  redirect('/');
 }
 
 //CREATE BOOK
@@ -71,8 +82,9 @@ export async function createBook( formData: FormData ){
   });
 
   const result = await sql`
-    INSERT INTO books (title, author, created_date)
+    INSERT INTO books (user_id, title, author, created_date)
     VALUES (
+      ${ session.user.email },
       ${title},
       ${author},
       NOW()

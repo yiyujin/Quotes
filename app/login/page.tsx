@@ -44,7 +44,7 @@ export default function LoginPage() {
             <h3>Sign Up</h3>
             <br/>
 
-            <form aciton = { createUser } onSubmit = { handleSubmit }>
+            <form action = { createUser } onSubmit = { handleSubmit }>
                 <div>
                     <label htmlFor = "email">Email</label>
                     <input required id = "email" name = "email" placeholder = "Enter your email address"/>
