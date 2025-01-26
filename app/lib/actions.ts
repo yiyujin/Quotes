@@ -37,6 +37,7 @@ import { z } from 'zod';
 import { sql } from '@vercel/postgres';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import bcrypt from 'bcrypt';
 
 //CREATE USER
 const FromSchemaUser = z.object({
@@ -54,19 +55,21 @@ export async function createUser( formData : FormData ){
     password : formData.get('password'),
   });
 
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const result = await sql`
   INSERT INTO users (name, lastname, email, password, created_date)
   VALUES(
     ${name},
     ${lastname},
     ${email},
-    ${password},
+    ${hashedPassword},
     NOW()
   )
     RETURNING id
   `;
 
-  redirect('/');
+  revalidatePath('/');
 }
 
 //CREATE BOOK

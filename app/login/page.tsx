@@ -1,22 +1,20 @@
 'use client';
 
 import LoginForm from "../ui/page/LoginForm";
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 import { createUser } from "../lib/actions";
 
 export default function LoginPage() {
+
+    const formRef = useRef<HTMLFormElement>(null);
 
     const handleSubmit = async ( e : any ) => {
         e.preventDefault();
 
         const formData = new FormData(e.target);
-
-        const name = formData.get('name')?.toString().trim();
-        const lastname = formData.get('lastname')?.toString().trim();
-        const email = formData.get('email')?.toString().trim();
-        const password = formData.get('password')?.toString().trim();
-
         await createUser( formData );
+
+        formRef.current?.reset();
     }
 
     return(
@@ -44,7 +42,7 @@ export default function LoginPage() {
             <h3>Sign Up</h3>
             <br/>
 
-            <form action = { createUser } onSubmit = { handleSubmit }>
+            <form ref={formRef} onSubmit = { handleSubmit }>
                 <div>
                     <label htmlFor = "email">Email</label>
                     <input required id = "email" name = "email" placeholder = "Enter your email address"/>
