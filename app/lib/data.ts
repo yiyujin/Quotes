@@ -4,7 +4,6 @@
 
 import { sql } from '@vercel/postgres';
 import { User, Book, Quote } from './definitions';
-import { revalidatePath } from 'next/cache';
 
 export async function getUser( email: string ) {
   try {

@@ -21,8 +21,7 @@ export default async function BookItemPage( { params : { id } } : { params : { i
                 <div className = "quotesList">
                     { data.map(( quote ) => (
                         <div key = { quote.id } className = "flex gap-4 snap-center">
-                            <p>{ quote.id }</p>
-                            <p>{ quote.page_number }</p>
+                            { quote.page_number !== 0 ? <p>{ quote.page_number }</p> : ""}
                             <p>{ quote.content }</p>
                         </div>
                     ))}
