@@ -49,10 +49,22 @@ export default function Player() {
         }
     };
 
+    //FADE EFFECT
+    const [fade, setFade] = useState('');
+    useEffect( () => {
+        setTimeout( () => {
+            setFade("playerQuoteEnd");
+        }, 100);
+
+        return() => {
+            setFade("");
+        }
+    }, [quote]);
+
     return (
         <div className = "page">
             <div style = { { display: "flex", flexDirection: "column", height: "100%" } }>
-                <div className = "playerQuote">
+                <div className = { `playerQuoteStart ${fade}` }>
                     <h1>{ quote?.data }</h1>
                 </div>
 

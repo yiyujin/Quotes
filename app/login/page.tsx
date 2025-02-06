@@ -42,7 +42,7 @@ export default function LoginPage() {
             <h3>Sign Up</h3>
             <br/>
 
-            <form ref={formRef} onSubmit = { handleSubmit }>
+            <form ref = { formRef } onSubmit = { handleSubmit }>
                 <div>
                     <label htmlFor = "email">Email</label>
                     <input required id = "email" name = "email" placeholder = "Enter your email address"/>

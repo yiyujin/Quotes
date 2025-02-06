@@ -301,7 +301,24 @@ button:hover{
   height : 24px;
 }
 
-.playerQuote {
+.playerQuoteStart {
+  text-align: center;
+  height : 100%;
+
+  margin : 240px;
+
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+
+  opacity : 0;
+}
+
+.playerQuoteEnd {
+  opacity : 255;
+  transition: opacity 2s;
+
   text-align: center;
   height : 100%;
 
